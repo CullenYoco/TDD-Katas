@@ -21,6 +21,8 @@ class RomanNumeralCalculatorTest {
     @Test
     public void tooBigTest() {
         illegalArgumentTest(4000);
+        illegalArgumentTest(5000);
+        illegalArgumentTest(10000);
     }
 
     @Test
@@ -36,6 +38,26 @@ class RomanNumeralCalculatorTest {
     @Test
     public void tenTest() {
         assertEquals("X", rnc.intToRoman(10));
+    }
+
+    @Test
+    public void fiftyTest() {
+        assertEquals("L", rnc.intToRoman(50));
+    }
+
+    @Test
+    public void oneHundredTest() {
+        assertEquals("C", rnc.intToRoman(100));
+    }
+
+    @Test
+    public void fiveHundredTest() {
+        assertEquals("D", rnc.intToRoman(500));
+    }
+
+    @Test
+    public void oneThousandTest() {
+        assertEquals("M", rnc.intToRoman(1000));
     }
 
     private void illegalArgumentTest(int value) {
