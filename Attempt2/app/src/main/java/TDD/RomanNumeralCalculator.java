@@ -1,23 +1,8 @@
 package TDD;
 
-import java.util.HashMap;
-
 public class RomanNumeralCalculator {
-    HashMap<Integer, String> romanNumeralTranslator = new HashMap<Integer, String>();
-
-    public RomanNumeralCalculator() {
-        initTranslator();
-    }
-
-    private void initTranslator() {
-        romanNumeralTranslator.put(1, "I");
-        romanNumeralTranslator.put(5, "V");
-        romanNumeralTranslator.put(10, "X");
-        romanNumeralTranslator.put(50, "L");
-        romanNumeralTranslator.put(100, "C");
-        romanNumeralTranslator.put(500, "D");
-        romanNumeralTranslator.put(1000, "M");
-    }
+    private final int keyNumbers[] = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
+    private final String keyNumberTranslations[] = {"I", "IV", "V", "IX", "X","XL", "L", "XC", "C", "CD", "D", "CM", "M"};
 
     public String intToRoman(int value) {
         if (isInvalidValue(value)) {
@@ -28,7 +13,20 @@ public class RomanNumeralCalculator {
     }
 
     private String findRomanTranslation(int value) {
-        return romanNumeralTranslator.containsKey(value) ? romanNumeralTranslator.get(value) : null;
+        String outputString = "";
+
+        for (int i = keyNumbers.length - 1; i > -1; i--) {
+            int timesDivisibleByKeyNumber = Math.floorDiv(value, keyNumbers[i]);
+
+            outputString += keyNumberTranslations[i].repeat(timesDivisibleByKeyNumber);
+            value -= timesDivisibleByKeyNumber * keyNumbers[i];
+
+            if (value == 0) {
+                break;
+            }
+        }
+
+        return outputString;
     }
 
     private boolean isInvalidValue(int value) {
